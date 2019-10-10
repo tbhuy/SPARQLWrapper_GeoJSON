@@ -1117,7 +1117,7 @@ class QueryResult(object):
             @type mime: string
             @param requested: the requested format.
             @type requested: string
-            """
+            """      
             if requested not in allowed:
                 message = "Format requested was %s, but %s (%s) has been returned by the endpoint"
                 warnings.warn(message % (requested.upper(), format_name, mime), RuntimeWarning)
@@ -1133,10 +1133,7 @@ class QueryResult(object):
                 _validate_format("XML", [XML], ct, self.requestedFormat)
                 return self._convertXML()
             elif _content_type_in_list(ct, _SPARQL_JSON):
-                _validate_format("JSON", [JSON], ct, self.requestedFormat)
-                return self._convertJSON()
-            elif _content_type_in_list(ct, _GEOJSON):
-                _validate_format("GEOJSON", [JSON, GEOJSON], ct, self.requestedFormat)
+                _validate_format("JSON", [JSON, GEOJSON], ct, self.requestedFormat)
                 return self._convertJSON()
             elif _content_type_in_list(ct, _RDF_XML):
                 _validate_format("RDF/XML", [RDF, XML, RDFXML], ct, self.requestedFormat)
@@ -1180,6 +1177,7 @@ class QueryResult(object):
 
         if "content-type" in self.info():
             ct = self.info()["content-type"] # returned Content-Type value
+            print(ct)
 
             if _content_type_in_list(ct, _SPARQL_XML):
                 return XML
